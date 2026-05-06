@@ -3,16 +3,109 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Learn lazygit keyboard shortcuts — Duolingo-style" />
-    <title>lazygit.learn</title>
+
+    <title>lazygit.learn — Master lazygit Keyboard Shortcuts</title>
+    <meta
+      name="description"
+      content="Learn lazygit keyboard shortcuts the fun way. A free, Duolingo-style trainer for navigation, staging, commits, branches, stash, rebase, and more."
+    />
+    <meta
+      name="keywords"
+      content="lazygit, lazygit shortcuts, lazygit keybindings, lazygit tutorial, learn lazygit, git tui, terminal git, git keyboard shortcuts, interactive git"
+    />
+    <meta name="author" content="Andrew Mason" />
+    <meta name="theme-color" content="#070b08" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="canonical" href="https://lazygit-learn.andrewm.codes/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="lazygit.learn" />
+    <meta property="og:title" content="lazygit.learn — Master lazygit Keyboard Shortcuts" />
+    <meta
+      property="og:description"
+      content="A free, Duolingo-style trainer for lazygit shortcuts. Earn XP, keep your streak, and ship faster from the terminal."
+    />
+    <meta property="og:url" content="https://lazygit-learn.andrewm.codes/" />
+    <meta property="og:image" content="https://lazygit-learn.andrewm.codes/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="lazygit.learn — owl mascot with laptop and coffee mug" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="lazygit.learn — Master lazygit Keyboard Shortcuts" />
+    <meta
+      name="twitter:description"
+      content="A free, Duolingo-style trainer for lazygit shortcuts. Earn XP, keep your streak, and ship faster from the terminal."
+    />
+    <meta name="twitter:image" content="https://lazygit-learn.andrewm.codes/og-image.png" />
+    <meta name="twitter:image:alt" content="lazygit.learn — owl mascot with laptop and coffee mug" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Crawler hints -->
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <!-- Preconnect to Google Fonts (loaded by the app) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "lazygit.learn",
+        "url": "https://lazygit-learn.andrewm.codes/",
+        "description": "Interactive, Duolingo-style trainer for mastering lazygit keyboard shortcuts.",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "isAccessibleForFree": true,
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Andrew Mason",
+          "url": "https://andrewm.codes"
+        }
+      }
+    </script>
+
     <style>
-      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-      html, body, #root { height: 100%; }
-      body { background: #070b08; }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body,
+      #root {
+        height: 100%;
+      }
+      body {
+        background: #070b08;
+      }
     </style>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <p style="color: #b4ecbe; font-family: sans-serif; padding: 24px; text-align: center">
+        lazygit.learn is an interactive trainer that requires JavaScript. Please enable JavaScript to play.
+      </p>
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

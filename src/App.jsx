@@ -692,7 +692,6 @@ export default function App() {
                   fontWeight: 700,
                   color: T.text,
                   lineHeight: 1.4,
-                  padding: "0 8px",
                   background: T.surface,
                   border: `1px solid ${T.border}`,
                   borderRadius: "12px",

@@ -27,9 +27,6 @@
     </filter>
   </defs>
 
-  <rect width="1024" height="1024" fill="#ffffff"/>
-  <ellipse cx="512" cy="921" rx="260" ry="22" fill="#d9d9d9"/>
-
   <!-- Body and feet -->
   <ellipse cx="512" cy="720" rx="220" ry="185" fill="url(#body)"/>
   <rect x="359" y="860" width="130" height="56" rx="26" fill="#ffb000"/>

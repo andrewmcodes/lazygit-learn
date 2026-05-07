@@ -1,12 +1,12 @@
 {
-  "name": "lazygit.learn",
-  "short_name": "lazygit.learn",
-  "description": "Learn lazygit keyboard shortcuts — Duolingo-style.",
+  "name": "keypeck",
+  "short_name": "keypeck",
+  "description": "Drill the keyboard shortcuts of the tools you actually use — VS Code, Vim, tmux, lazygit, and more.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#070b08",
-  "theme_color": "#070b08",
+  "background_color": "#101211",
+  "theme_color": "#101211",
   "icons": [
     {
       "src": "/icon-192.png",

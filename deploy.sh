@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# ── lazygit-learn deploy script ───────────────────────────────────────────────
+# ── keypeck deploy script ─────────────────────────────────────────────────────
 # Uses: gh (GitHub CLI), mise, pnpm (via mise)
 # Run once from inside the project directory.
 # Usage: ./deploy.sh [repo-name] [your-subdomain]
-#   e.g. ./deploy.sh lazygit-learn learn.yoursite.com
+#   e.g. ./deploy.sh keypeck keypeck.yoursite.com
 # ─────────────────────────────────────────────────────────────────────────────
 
 set -euo pipefail
 
-REPO_NAME="${1:-lazygit-learn}"
+REPO_NAME="${1:-keypeck}"
 SUBDOMAIN="${2:-}"
 
 # ── Preflight checks ──────────────────────────────────────────────────────────
@@ -69,15 +69,8 @@ else
     --source=. \
     --remote=origin \
     --push \
-    --description "Learn lazygit keyboard shortcuts — Duolingo-style"
+    --description "keypeck — drill the keyboard shortcuts of the tools you use (lazygit, tmux, and more)"
   echo "  ✓ Repo created and pushed."
-fi
-
-# Push if origin already existed
-if git remote get-url origin &>/dev/null; then
-  git push --set-upstream origin main 2>/dev/null \
-    || git push --set-upstream origin master 2>/dev/null \
-    || true
 fi
 
 GH_USER=$(gh api user --jq '.login')
@@ -98,8 +91,8 @@ echo ""
 echo "   Framework preset : None (or Vite)"
 echo "   Build command     : pnpm build"
 echo "   Output directory  : dist"
-echo "   Node version      : 22   (set in Settings → Environment Variables)"
-echo "                            NODE_VERSION = 22"
+echo "   Node version      : 24   (set in Settings → Environment Variables)"
+echo "                            NODE_VERSION = 24"
 echo ""
 echo "4. Deploy. Your app will be live at:"
 echo "   https://$REPO_NAME.pages.dev"

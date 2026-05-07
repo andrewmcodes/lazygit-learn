@@ -1,5 +1,21 @@
 node_modules/
 dist/
+
+# Env / secrets
 .env
-.env.local
+.env.*
+!.env.example
+
+# OS / editor cruft
 .DS_Store
+**/.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
+
+# Logs
+*-debug.log*
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*

@@ -397,12 +397,39 @@ export default function App() {
   const advanceTimer = useRef(null);
   const sheetStartRef = useRef(null);
   const sheetOpenerRef = useRef(null);
+  const viewHeadingRef = useRef(null);
+  const isInitialMount = useRef(true);
 
   // Persist progress + XP to localStorage whenever they change. Loaded values
   // are written back on first mount; that's a harmless no-op.
   useEffect(() => {
     saveState({ prog, totalXp });
   }, [prog, totalXp]);
+
+  // Update the document title and shift focus to the view's <h1> on every
+  // view change, so SR + browser-tab users always know where they are and
+  // keyboard focus doesn't get stranded on an unmounted control.
+  useEffect(() => {
+    const title =
+      view === "tracks"
+        ? "keypeck"
+        : view === "map" && track
+          ? `keypeck — ${track.name}`
+          : view === "lesson" && track && unit
+            ? `keypeck — ${track.name} · ${unit.title}`
+            : view === "result"
+              ? "keypeck — Lesson complete"
+              : "keypeck";
+    document.title = title;
+    // Skip the focus shift on first mount — let the browser's normal
+    // page-load announcement run uninterrupted.
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    const r = requestAnimationFrame(() => viewHeadingRef.current?.focus());
+    return () => cancelAnimationFrame(r);
+  }, [view, track, unit]);
 
   // Clear any pending auto-advance timer when leaving the lesson view, so
   // the user can't get yanked from the map back to a result screen for a
@@ -601,6 +628,8 @@ export default function App() {
             }}
           />
           <h1
+            ref={viewHeadingRef}
+            tabIndex={-1}
             style={{
               fontFamily: "'VT323', monospace",
               fontSize: 44,
@@ -609,6 +638,7 @@ export default function App() {
               lineHeight: 1,
               fontWeight: "normal",
               margin: 0,
+              outline: "none",
             }}
           >
             KEYPECK
@@ -657,6 +687,7 @@ export default function App() {
                 key={t.id}
                 className="track-card"
                 onClick={() => openTrack(t)}
+                aria-label={`Open ${t.name} (${t.tagline}), ${stats.done} of ${stats.total} units done`}
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -674,6 +705,7 @@ export default function App() {
                 }}
               >
                 <div
+                  aria-hidden="true"
                   style={{
                     width: 56,
                     height: 56,
@@ -794,7 +826,8 @@ export default function App() {
             </button>
             <img
               src="/mascot.png"
-              alt="keypeck mascot"
+              alt=""
+              aria-hidden="true"
               width="44"
               height="44"
               style={{
@@ -807,6 +840,8 @@ export default function App() {
             />
             <div>
               <h1
+                ref={viewHeadingRef}
+                tabIndex={-1}
                 style={{
                   fontFamily: "'VT323', monospace",
                   fontSize: 27,
@@ -815,6 +850,7 @@ export default function App() {
                   lineHeight: 1.1,
                   fontWeight: "normal",
                   margin: 0,
+                  outline: "none",
                 }}
               >
                 {track.name.toUpperCase()}
@@ -1185,6 +1221,8 @@ export default function App() {
         >
           {/* Unit chip — also the page heading */}
           <h1
+            ref={viewHeadingRef}
+            tabIndex={-1}
             style={{
               fontSize: 11,
               fontWeight: 700,
@@ -1195,17 +1233,22 @@ export default function App() {
               border: `1px solid ${unit.color}40`,
               borderRadius: 20,
               padding: "4px 13px",
-              marginBottom: 30,
               margin: "0 0 30px 0",
+              outline: "none",
             }}
           >
             <span aria-hidden="true">{unit.emoji} </span>
             {track.name} · {unit.title}
           </h1>
 
-          {/* Prompt */}
+          {/* Prompt — aria-live so SR users hear the new question after qi advances */}
           {q.type === "key_to_action" ? (
-            <div style={{ textAlign: "center", marginBottom: 30, width: "100%" }}>
+            <div
+              aria-live="polite"
+              aria-atomic="true"
+              aria-label={`Question ${qi + 1} of ${questions.length}: what does the key ${q.key} do?`}
+              style={{ textAlign: "center", marginBottom: 30, width: "100%" }}
+            >
               <div
                 style={{
                   fontSize: 13,
@@ -1236,7 +1279,12 @@ export default function App() {
               </div>
             </div>
           ) : (
-            <div style={{ textAlign: "center", marginBottom: 30, width: "100%" }}>
+            <div
+              aria-live="polite"
+              aria-atomic="true"
+              aria-label={`Question ${qi + 1} of ${questions.length}: which key do you press to ${q.action}?`}
+              style={{ textAlign: "center", marginBottom: 30, width: "100%" }}
+            >
               <div
                 style={{
                   fontSize: 13,
@@ -1423,6 +1471,8 @@ export default function App() {
               💀
             </div>
             <h1
+              ref={viewHeadingRef}
+              tabIndex={-1}
               style={{
                 fontFamily: "'VT323', monospace",
                 fontSize: 38,
@@ -1430,6 +1480,7 @@ export default function App() {
                 letterSpacing: 3,
                 fontWeight: "normal",
                 margin: 0,
+                outline: "none",
               }}
             >
               OUT OF LIVES
@@ -1439,14 +1490,16 @@ export default function App() {
         ) : (
           <>
             <h1
+              ref={viewHeadingRef}
+              tabIndex={-1}
               style={{
                 fontSize: 11,
                 color: unit.color,
                 textTransform: "uppercase",
                 letterSpacing: 3,
-                marginBottom: 22,
                 fontWeight: 700,
                 margin: "0 0 22px 0",
+                outline: "none",
               }}
             >
               <span aria-hidden="true">{unit.emoji} </span>
